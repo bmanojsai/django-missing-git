@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--
+Contact Us page
+-->
+{% load static %}
+
+<html>
+    <head>
+        <title>Contact Us</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+      {% if user.is_authenticated %}
+
+      <div id="header">
+          <a href="{% url 'Home_Page' %}" ><h2 id="logo" >Missing </h2> </a>
+          <nav id="navv">
+              <ul>
+                  <li class="nav_items"><a href="{% url 'Logout' %}" class="nav_items1">Log out</a></li>
+                  <li class="nav_items"><a href="{% url 'Contact_Page' %}" class="nav_items1">Contact Us</a></li>
+                  <li class="nav_items"><a href="{% url 'Profile_Page' %}" class="nav_items1">Profile</a></li>
+                  <li class="nav_items"><a href="{% url 'Found_Page' %}" class="nav_items1">Found Something</a></li>
+                  <li class="nav_items"><a href="{% url 'Lost_Page' %}" class="nav_items1">Lost Something</a></li>
+              </ul>
+          </nav>
+      </div>
+
+      {% else %}
+      <div id="header">
+          <a href="{% url 'Home_Page' %}" ><h2 id="logo" >Missing</h2> </a>
+          <nav id="navv">
+              <ul>
+                  <li class="nav_items"><a href="{% url 'Login_Page' %}" class="nav_items1">Contact Us</a></li>
+                  <li class="nav_items"><a href="{% url 'Login_Page'  %}" class="nav_items1">Log in</a></li>
+                  <li class="nav_items"><a href="{% url 'sign_up_Page' %}" class="nav_items1">Sign Up</a></li>
+              </ul>
+          </nav>
+      </div>
+
+      {% endif %}
+
+        <div class="sign_up_outer_div">
+              <div class="sign_up_div">
+                  <h1  class="text1" style="margin:0px 0px 30px 0px" >Message us...!</h1>
+                  <br>
+                  {% if textt %}
+                    <h1 class="text1" >{{ textt }}</h1>
+                  {% endif %}
+                  {% if contact_obj %}
+                  <form method="post" style="padding-left:20px;">
+                      <p style="color:White;" > Subject<em style="visibility:hidden">.......</em>: {{ contact_obj.subject}}</p>
+                      <br>
+                      <p style="color:White;" > Message<em style="visibility:hidden">00.</em>: {{ contact_obj.message}}</p>
+                      {% csrf_token %}
+                      <center><input class="submit" type="submit" value="Message"></center>
+                  </form>
+                  {% endif %}
+
+              </div>
+              <div id="notice_div">
+                  <h2 class="text1 text2" ><em>About Me</em></h2>
+                  <p class="text1 text2">Hello all...!<br><br>I am Manoj, 3rd year
+                    Electronics and Communication Engineering.<br> In this website you can register
+                    any complaint if you lost anything. In case you found anything, you can inform them
+                    through their mail id and hand it to them all by yourself.<br>
+                   </p>
+
+                   <p class="text1 text2">Note: In case of any problem , you are always free to contact us :)</p>
+              </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+</html>

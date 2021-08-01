@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Profile</title>
+    <link rel="stylesheet" href='{% static "css/style.css" %}' type="text/css" >
+    <style media="screen">
+      .sign_up_outer_div{
+        height : 900px;
+        margin-bottom : 25px;
+      }
+      .profile_div2{
+
+      }
+      .details_div{
+        height: 230px;
+        width:300px;
+
+      }
+      .details_div_1{
+        width: 500px;
+        height: 170px;
+        padding-top : 65px;
+        float: left;
+        padding-left: 5px;
+
+
+      }
+      .settings_div{
+        width: 905px;
+        height: 75px;
+        padding-top: 15px;
+        padding-left : 60px;
+        float: left;
+
+      }
+      .submit{
+        text-decoration:None;
+        padding :15px;
+      }
+      .Complaints_div{
+        width: 1000px;
+        height: 500px;
+        float:left;
+        padding: 20px;
+        overflow: auto;
+        margin-left: 120px;
+      }
+
+      .complaint_table{
+        width:1000px;
+      }
+    </style>
+  </head>
+  <body>
+      {% if user.is_authenticated %}
+
+      <div id="header">
+          <a href="{% url 'Home_Page' %}" ><h2 id="logo" >Missing </h2> </a>
+          <nav id="navv">
+            <ul>
+                <li class="nav_items"><a href="{% url 'Logout' %}" class="nav_items1">Log out</a></li>
+                <li class="nav_items"><a href="{% url 'Contact_Page' %}" class="nav_items1">Contact Us</a></li>
+                <li class="nav_items"><a href="{% url 'Profile_Page' %}" class="nav_items1">Profile</a></li>
+                <li class="nav_items"><a href="{% url 'Found_Page' %}" class="nav_items1">Found Something</a></li>
+                <li class="nav_items"><a href="{% url 'Lost_Page' %}" class="nav_items1">Lost Something</a></li>
+            </ul>
+          </nav>
+      </div>
+      {% else %}
+      <div id="header">
+          <a href="{% url 'Home_Page' %}" ><h2 id="logo" >Missing</h2> </a>
+          <nav id="navv">
+            <ul>
+                <li class="nav_items"><a href="{% url 'Login_Page' %}" class="nav_items1">Contact Us</a></li>
+                <li class="nav_items"><a href="{% url 'Login_Page'  %}" class="nav_items1">Log in</a></li>
+                <li class="nav_items"><a href="{% url 'sign_up_Page' %}" class="nav_items1">Sign Up</a></li>
+            </ul>
+          </nav>
+      </div>
+
+    {% endif %}
+
+
+    <div class='sign_up_outer_div'>
+        <div class="profile_div1">
+            <div class="profile_div2">
+                <img id="id_pic" src="{{ require_user_profile_info.id_card_pic.url  }}"  alt="Id_pic">
+            </div>
+            <div class="details_div">
+              <h1 class="text1" style="margin-bottom:35px;" >Profile</h1>
+              <h3 class="text1" > Name<em style="visibility:hidden">................</em>: {{ require_user_profile.username }}</h3>
+              <h3 class="text1" > Register no<em style="visibility:hidden">.......</em>: {{ require_user_profile_info.register_no }}</h3>
+              <h3 class="text1" > Branch<em style="visibility:hidden">0000000</em>: {{ require_user_profile_info.branch }}</h3>
+            </div>
+            <div class="details_div_1">
+              <br>
+              <h3 class="text1" > Sastra Email id : {{ require_user_profile.email }}</h3>
+              <h3 class="text1" > Mobile no<em style="visibility:hidden">..........</em>: {{ require_user_profile_info.mobile_no }}</h3>
+              <h3 class="text1">Status<em style="visibility:hidden">................</em> : {{ require_user_profile_info.status }}</h3>
+            </div>
+            <div class="settings_div">
+                <p class="text1">Want to Change your Password..? Change it here .......<a class="submit" href="{% url 'Change_Password'  %}">Change Password</a> </p>
+            </div>
+        </div>
+
+        <div class="Complaints_div">
+            <h2 class="text1">Your Complaints</h2>
+            <table class="complaint_table">
+                <tbody>
+                    <tr>
+                        <th class="text1 ctable_items1 ctable_items2 " >Date&Time</th>
+                        <th class="text1 ctable_items1 ctable_items2" >Item Name</th>
+                        <th class="text1 ctable_items1 ctable_items2">Person raised the complaint</th>
+                        <th class='text1 ctable_items1 ctable_items2'>Type</th>
+                    </tr>
+                    {% if user_complaints_obj %}
+                    {% for obj in user_complaints_obj %}
+                    <tr>
+                        <td class="text1 ctable_items1">{{ obj.timestamp }}</td>
+                        <td class="text1 ctable_items1">{{ obj.item_name }}</td>
+                        <td class="text1 ctable_items1">{{ obj.usernamee }}</td>
+                        <td class="text1 ctable_items1">{{ obj.catogeory }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <p class="text1">No Complaints yet.</p>
+                    {% endif %}
+                </tbody>
+              </table>
+
+        </div>
+
+    </div>
+  </body>
+</html>

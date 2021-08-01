@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--
+Sign up page
+-->
+{% load static %}
+
+<html>
+    <head>
+        <title>Found Something?</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+      {% if user.is_authenticated %}
+
+      <div id="header">
+          <a href="{% url 'Home_Page' %}" ><h2 id="logo" >Missing </h2> </a>
+          <nav id="navv">
+              <ul>
+                  <li class="nav_items"><a href="{% url 'Logout' %}" class="nav_items1">Log out</a></li>
+                  <li class="nav_items"><a href="{% url 'Contact_Page' %}" class="nav_items1">Contact Us</a></li>
+                  <li class="nav_items"><a href="{% url 'Profile_Page' %}" class="nav_items1">Profile</a></li>
+                  <li class="nav_items"><a href="{% url 'Found_Page' %}" class="nav_items1">Found Something</a></li>
+                  <li class="nav_items"><a href="{% url 'Lost_Page' %}" class="nav_items1">Lost Something</a></li>
+              </ul>
+          </nav>
+      </div>
+
+      {% else %}
+      <div id="header">
+          <a href="{% url 'Home_Page' %}" ><h2 id="logo" >Missing</h2> </a>
+          <nav id="navv">
+              <ul>
+                  <li class="nav_items"><a href="{% url 'Login_Page' %}" class="nav_items1">Contact Us</a></li>
+                  <li class="nav_items"><a href="{% url 'Login_Page'  %}" class="nav_items1">Log in</a></li>
+                  <li class="nav_items"><a href="{% url 'sign_up_Page' %}" class="nav_items1">Sign Up</a></li>
+              </ul>
+          </nav>
+      </div>
+
+      {% endif %}
+
+        <center>
+            <div class='upload_divs1'>
+                <p class="text1 matter" > <strong style="font-size: 25px;">Found Something?...</strong>do you think someone lost that item?.<br>
+                    Good! Once check out the below table whether some one raised any complaint about that item.
+                    If you find the complaint, please contact the user via email shown and hand it to the user safely.
+                </p>
+                <br>
+                <div class="table_div" >
+                    <table class="text1 complaint_table_1">
+                        <tbody>
+                            <tr>
+                                <th class="ctable_items1 ctable_items2 " >Date-Time</th>
+                                <th class="ctable_items1 ctable_items2" >Item Name</th>
+                                <th class="ctable_items1 ctable_items2">Item details(if any)</th>
+                                <th class="ctable_items1 ctable_items2">Expected places of lost item</th>
+                                <th class="ctable_items1 ctable_items2">Person raised the complaint</th>
+                                <th class="ctable_items1 ctable_items2">Email id of the Person</th>
+                            </tr>
+                  {% if complaints_obj %}
+                  {% for obj in complaints_obj %}
+                            <tr>
+                                <td class="ctable_items1">{{ obj.timestamp }}</td>
+                                <td class="ctable_items1">{{ obj.item_name }}</td>
+                                <td class="ctable_items1">{{ obj.item_details }}</td>
+                                <td class="ctable_items1">{{ obj.expected_place }}</td>
+                                <td class="ctable_items1">{{ obj.usernamee }}</td>
+                                <td class="ctable_items1">{{ obj.emaill}}</td>
+                            </tr>
+                  {% endfor %}
+                  {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!--
+            <div class='upload_divs1'>
+                <p class="text1" > Didn't find any complaint related to the item you found?<br>
+                    No Worries!...Just upload the details of the item you found here!. We will make sure your complaint is
+                    seen by the user before raising any other complaint.
+                </p>
+
+                <div id="form_div" >
+                    <form>
+                        <h1>Form will come here by default Django code </h1>
+                    </form>
+                </div>
+
+            </div>
+            -->
+
+        </center>
+    </body>
+</html>

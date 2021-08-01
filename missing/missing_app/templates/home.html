@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+This page is shown before logging in.
+-->
+{% load static %}
+
+<html>
+    <head>
+        <title>Missing</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+      {% if user.is_authenticated %}
+
+      <div id="header">
+          <a href="{% url 'Home_Page' %}" ><h2 id="logo" >Missing </h2> </a>
+          <nav id="navv">
+              <ul>
+                  <li class="nav_items"><a href="{% url 'Logout' %}" class="nav_items1">Log out</a></li>
+                  <li class="nav_items"><a href="{% url 'Contact_Page' %}" class="nav_items1">Contact Us</a></li>
+                  <li class="nav_items"><a href="{% url 'Profile_Page' %}" class="nav_items1">Profile</a></li>
+                  <li class="nav_items"><a href="{% url 'Found_Page' %}" class="nav_items1">Found Something</a></li>
+                  <li class="nav_items"><a href="{% url 'Lost_Page' %}" class="nav_items1">Lost Something</a></li>
+              </ul>
+          </nav>
+      </div>
+
+      {% else %}
+      <div id="header">
+          <a href="{% url 'Home_Page' %}" ><h2 id="logo" >Missing</h2> </a>
+          <nav id="navv">
+              <ul>
+                  <li class="nav_items"><a href="{% url 'admin:index' %}" class="nav_items1">Admin Login</a></li>
+                  <li class="nav_items"><a href="{% url 'Login_Page' %}" class="nav_items1">Contact Us</a></li>
+                  <li class="nav_items"><a href="{% url 'Login_Page'  %}" class="nav_items1">Log in</a></li>
+                  <li class="nav_items"><a href="{% url 'sign_up_Page' %}" class="nav_items1">Sign Up</a></li>
+              </ul>
+          </nav>
+      </div>
+
+      {% endif %}
+
+        <div id="background-img">
+            <center>
+                <div id="content" >
+                    <p class="content_items2" ><em>Did you lost something?...Don't worry!<br>Search it here...</em></p>
+                    {% if user.is_authenticated %}
+                    <h3 class="content_items1" ><a  class="nav_items1" href="{% url 'Lost_Page' %}">Lost Something?</a></h3>
+                    <p class="content_items2" >----------------------</p>
+                    <p class="content_items2"><em>Did you found something?...good!<br>Check it here...</em></p>
+                    <h3 class="content_items1" ><a class="nav_items1" href="{% url 'Found_Page' %}">Found Something?</a></h3>
+                    {% else %}
+                    <h3 class="content_items1" ><a  class="nav_items1" href="{% url 'Login_Page' %}">Lost Something?</a></h3>
+                    <p class="content_items2" >----------------------</p>
+                    <p class="content_items2"><em>Did you found something?...good!<br>Check it here...</em></p>
+                    <h3 class="content_items1" ><a class="nav_items1" href="{% url 'Login_Page' %}">Found Something?</a></h3>
+                    {% endif %}
+
+                </div>
+            </center>
+        </div>
+    </body>
+</html>

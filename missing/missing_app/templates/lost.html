@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--
+Lost Something page
+-->
+{% load static %}
+
+<html>
+    <head>
+        <title>Lost Something?</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+      {% if user.is_authenticated %}
+
+      <div id="header">
+          <a href="{% url 'Home_Page' %}" ><h2 id="logo" >Missing </h2> </a>
+          <nav id="navv">
+              <ul>
+                  <li class="nav_items"><a href="{% url 'Logout' %}" class="nav_items1">Log out</a></li>
+                  <li class="nav_items"><a href="{% url 'Contact_Page' %}" class="nav_items1">Contact Us</a></li>
+                  <li class="nav_items"><a href="{% url 'Profile_Page' %}" class="nav_items1">Profile</a></li>
+                  <li class="nav_items"><a href="{% url 'Found_Page' %}" class="nav_items1">Found Something</a></li>
+                  <li class="nav_items"><a href="{% url 'Lost_Page' %}" class="nav_items1">Lost Something</a></li>
+              </ul>
+          </nav>
+      </div>
+
+      {% else %}
+      <div id="header">
+          <a href="{% url 'Home_Page' %}" ><h2 id="logo" >Missing</h2> </a>
+          <nav id="navv">
+              <ul>
+                  <li class="nav_items"><a href="{% url 'Login_Page' %}" class="nav_items1">Contact Us</a></li>
+                  <li class="nav_items"><a href="{% url 'Login_Page'  %}" class="nav_items1">Log in</a></li>
+                  <li class="nav_items"><a href="{% url 'sign_up_Page' %}" class="nav_items1">Sign Up</a></li>
+              </ul>
+          </nav>
+      </div>
+
+      {% endif %}
+
+        {% if user.is_authenticated %}
+
+
+        <div class="sign_up_outer_div">
+              <div class="sign_up_div">
+                {% if text  %}
+                <h1 class="text1" >{{ text }}</h1>
+                <p class="text1">Only verified users can register complaints here. please wait till your account is verified.Usually it takes no more than 1 day.</p>
+
+                {% else %}
+                  <h1  class="text1" style="margin:0px 0px 30px 0px" >Fill the details here...!</h1>
+                  <form method="post" style="padding-left:20px;" enctype="multipart/form-data">
+                      <p style="color:White;" > Item name<em style="visibility:hidden">.........</em>: {{ Items_lost_form_obj.item_name}}</p>
+                      <p style="color:White;" > Expected Place<em style="visibility:hidden">.</em>: {{ Items_lost_form_obj.expected_place}}</p>
+                      <p style="color:White;" > Item Details<em style="visibility:hidden">......</em>: {{ Items_lost_form_obj.item_details}}</p>
+                      {% csrf_token %}
+                      <center><input class="submit" type="submit" value="Submit"></center>
+                  </form>
+                  {% endif %}
+
+              </div>
+
+        {% endif %}
+              <div id="notice_div">
+                  <h2 class="text1 text2" ><em>Hello.....!</em></h2>
+                  <p class="text1 text2">Lost Something???....Don't Worry!<br><br>File a Complaint here, so that
+                    if any one found your item, they will contact you through mail.<br>
+                    Add an image of the item, <em>if you had</em>, So that it will easier for them
+                    to identify the item.
+                   </p>
+                   <p class="text1 text2">Note: In case of any problem , you are always free to contact us :)</p>
+              </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+</html>

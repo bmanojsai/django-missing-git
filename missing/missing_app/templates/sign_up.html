@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--
+Sign up page
+-->
+{% load static %}
+
+<html>
+    <head>
+        <title>Missing</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+      {% if user.is_authenticated %}
+
+      <div id="header">
+          <a href="{% url 'Home_Page' %}" ><h2 id="logo" >Missing </h2> </a>
+          <nav id="navv">
+              <ul>
+                  <li class="nav_items"><a href="{% url 'Logout' %}" class="nav_items1">Log out</a></li>
+                  <li class="nav_items"><a href="{% url 'Contact_Page' %}" class="nav_items1">Contact Us</a></li>
+                  <li class="nav_items"><a href="{% url 'Profile_Page' %}" class="nav_items1">Profile</a></li>
+                  <li class="nav_items"><a href="{% url 'Found_Page' %}" class="nav_items1">Found Something</a></li>
+                  <li class="nav_items"><a href="{% url 'Lost_Page' %}" class="nav_items1">Lost Something</a></li>
+              </ul>
+          </nav>
+      </div>
+
+      {% else %}
+      <div id="header">
+          <a href="{% url 'Home_Page' %}" ><h2 id="logo" >Missing</h2> </a>
+          <nav id="navv">
+              <ul>
+                  <li class="nav_items"><a href="{% url 'Login_Page' %}" class="nav_items1">Contact Us</a></li>
+                  <li class="nav_items"><a href="{% url 'Login_Page'  %}" class="nav_items1">Log in</a></li>
+                  <li class="nav_items"><a href="{% url 'sign_up_Page' %}" class="nav_items1">Sign Up</a></li>
+              </ul>
+          </nav>
+      </div>
+
+      {% endif %}
+
+        {% if registered %}
+        <center>
+        <div class="upload_divs1">
+          <h1 class="text1">Thank You for Signing up!</h1>
+          <p class="text1">Please login here to continue.</p>
+        </div>
+      </center>
+        {% else %}
+        <div class="sign_up_outer_div">
+              <div class="sign_up_div">
+                  <h1  class="text1" style="margin:0px 0px 30px 0px" >Sign up Here...!</h1>
+
+                  <form method="post" style="padding-left:20px;" enctype="multipart/form-data">
+                      <p style="color:White;" > Name<em style="visibility:hidden">................</em>: {{ User_form_obj.username}}</p>
+                      <p style="color:White;" > Register no<em style="visibility:hidden">.......</em>: {{ UserProfileInfo_form_obj.register_no}}</p>
+                      <p style="color:White;" > Branch<em style="visibility:hidden">0000000</em>: {{ UserProfileInfo_form_obj.branch}}</p>
+                      <p style="color:White;" > Sastra Email id : {{ User_form_obj.email}}</p>
+                      <p style="color:White;" > Password<em style="visibility:hidden">..........</em>: {{ User_form_obj.password}}</p>
+                      <p style="color:White;" > Mobile no<em style="visibility:hidden">.........</em>: {{ UserProfileInfo_form_obj.mobile_no}}</p>
+                      <p style="color:White;" > Id Card Picture : {{ UserProfileInfo_form_obj.id_card_pic}}</p>
+                      {% csrf_token %}
+                      <!-- <div style="color:White">
+                      {{UserProfileInfo_form_obj.as_p }}
+                      </div> -->
+                      <center><input class="submit" type="submit" value="Sign Up"></center>
+                  </form>
+
+              </div>
+
+              <div id="notice_div">
+                  <h2 class="text1 text2" ><em>Hello.....!</em></h2>
+                  <p class="text1 text2">We are glad to see you here!<br><br>Did you lost Something? File a Complaint here, so that
+                    if any one found your item, they will inform you.<br>Did you found smething? Check out
+                    the Complaints registered and inform them.
+                   </p>
+                   <p class="text1 text2">Note: In case of any issue , you are always free to contact us :)</p>
+              </div>
+
+        </div>
+
+        {% endif %}
+
+    </body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
+  </head>
+  <style>
+    .login_popup{
+      width : 700px;
+      height :400px;
+      margin-top : 100px;
+      margin-left: 410px;
+      border-radius: 30px;
+      background-color: rgb(0,0,0,0.5);
+      box-shadow: 0px 0px 30px rgb(194,33,33,0.9);
+        }
+    .headd{
+      background-color : rgb(194,33,33,0.9);
+      padding : 5px;
+      margin : 0px;
+      border-radius: 30px 30px 0px 0px;
+      height : 55px;
+    }
+
+    .heading{
+      margin : 15px 10px 20px 30px;
+      width : 200px;
+      height : 40px;
+
+    }
+    .form--div{
+        height : 260px;
+        padding : 2px;
+        border-bottom : 1px solid rgb(194,33,33,0.9);
+    }
+    .login-form-class{
+      width : 550px;
+      height :200px;
+      margin: 40px 65px;
+      padding : 5px;
+    }
+    .login_fields{
+      margin : 50px 20px;
+    }
+    .fields{
+      width : 400px;
+      height : 40px;
+      border-radius : 8px;
+    }
+    .labels{
+      font-size : 20px;
+      margin: 3px;
+    }
+    .login_fields{
+      margin :5px;
+      padding : 5px;
+    }
+    .loginn{
+      margin : 20px 200px;
+
+    }
+    .sign_upp{
+      margin : 25px;
+
+    }
+  </style>
+
+  <body>
+
+    {% if user.is_authenticated %}
+
+    <div id="header">
+        <a href="{% url 'Home_Page' %}" ><h2 id="logo" >Missing </h2> </a>
+        <nav id="navv">
+            <ul>
+                <li class="nav_items"><a href="{% url 'Logout' %}" class="nav_items1">Log out</a></li>
+                <li class="nav_items"><a href="{% url 'Contact_Page' %}" class="nav_items1">Contact Us</a></li>
+                <li class="nav_items"><a href="{% url 'Profile_Page' %}" class="nav_items1">Profile</a></li>
+                <li class="nav_items"><a href="{% url 'Found_Page' %}" class="nav_items1">Found Something</a></li>
+                <li class="nav_items"><a href="{% url 'Lost_Page' %}" class="nav_items1">Lost Something</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    {% else %}
+    <div id="header">
+        <a href="{% url 'Home_Page' %}" ><h2 id="logo" >Missing</h2> </a>
+        <nav id="navv">
+            <ul>
+                <li class="nav_items"><a href="{% url 'Login_Page' %}" class="nav_items1">Contact Us</a></li>
+                <li class="nav_items"><a href="{% url 'Login_Page'  %}" class="nav_items1">Log in</a></li>
+                <li class="nav_items"><a href="{% url 'sign_up_Page' %}" class="nav_items1">Sign Up</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    {% endif %}
+
+
+
+
+
+      <div class="login_popup" >
+          <div class="headd">
+
+            <h1 class="text1 heading " >Login</h1>
+          </div>
+
+          <div class="form--div">
+              <form class="login-form-class" action="{% url 'Login_Page' %}" method="post">
+
+                  <div class=" login_fields ">
+                      <label class= 'labels text1 ' for="Email" >Email id<em style="visibility:hidden">..-.</em> :</label>
+                      <input class="fields" type="email" name="Email" placeholder="Enter Sastra mail id">
+                  </div>
+
+                  <div class="login_fields">
+                      <label class= 'labels text1' for="Password" >Password <em style="visibility:hidden">..</em> :</label>
+                      <input class="fields" type="password" name="Password" placeholder="Enter Password">
+                  </div>
+                  {% csrf_token %}
+                  <input class="submit loginn "   type="submit"  value="Login">
+
+            </form>
+          </div>
+            <p class="text1 sign_upp" >Don't have an account? <a href="{% url 'sign_up_Page' %}">Sign up here</a> </p>
+      </div>
+
+
+
+
+
+
+
+  </body>
+</html>

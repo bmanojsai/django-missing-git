@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Error</title>
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
+  </head>
+  <body>
+    {% if user.is_authenticated %}
+
+    <div id="header">
+        <a href="{% url 'Home_Page' %}" ><h2 id="logo" >Missing </h2> </a>
+        <nav id="navv">
+            <ul>
+                <li class="nav_items"><a href="{% url 'Logout' %}" class="nav_items1">Log out</a></li>
+                <li class="nav_items"><a href="{% url 'Contact_Page' %}" class="nav_items1">Contact Us</a></li>
+                <li class="nav_items"><a href="{% url 'Profile_Page' %}" class="nav_items1">Profile</a></li>
+                <li class="nav_items"><a href="{% url 'Found_Page' %}" class="nav_items1">Found Something</a></li>
+                <li class="nav_items"><a href="{% url 'Lost_Page' %}" class="nav_items1">Lost Something</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    {% else %}
+    <div id="header">
+        <a href="{% url 'Home_Page' %}" ><h2 id="logo" >Missing</h2> </a>
+        <nav id="navv">
+            <ul>
+                <li class="nav_items"><a href="{% url 'Login_Page' %}" class="nav_items1">Contact Us</a></li>
+                <li class="nav_items"><a href="{% url 'Login_Page'  %}" class="nav_items1">Log in</a></li>
+                <li class="nav_items"><a href="{% url 'sign_up_Page' %}" class="nav_items1">Sign Up</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    {% endif %}
+
+    <h3 class="text1" >Account not found! .. please <a href="{% url 'sign_up_Page' %}">sign up</a> first</h3>
+
+  </body>
+</html>
